@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azurelight Games</title>
+    <style>
+        /* CSS for the background */
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #1e90ff, #0c3d99);
+            z-index: 0;
+        }
+
+        .menu {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .menu-item {
+            margin: 15px;
+            text-align: center;
+            color: white;
+            cursor: pointer;
+        }
+        
+                #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #1e90ff, #0c3d99);
+            z-index: 0;
+        }
+
+        .menu-item img {
+            width: 90px;
+            height: 90px;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .menu-item:hover img {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.7);
+        }
+
+        .menu-item:hover p {
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+        }
+
+        .search-bar {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            margin: 40px 0 20px 0;
+        }
+
+        .search-bar input {
+            width: 50%;
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-bar input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <div class="search-bar">
+        <input type="text" id="search" placeholder="🔍 Search by game title..." onkeyup="filterGames()">
+    </div>
+
+    <div class="menu" id="menu">
+        <div class="menu-item" onclick="launchFullscreen('https://fullscreen12.pages.dev')">
+            <img src="https://play-lh.googleusercontent.com/uJn2i9h7KxYQarC_c3K4qH6o7gLtflFnhD_dN14MNkzHJ1NeNFzCL69jpB5mT0vCoQs" alt="2048">
+            <p>Slope</p>
+        </div>
+        <div class="menu-item" onclick="launchFullscreen('https://sgs-game-cdn.pages.dev/Projects/Drive%20Mad/main.html')">
+            <img src="https://play-lh.googleusercontent.com/zGApa4C91zfSXuPMVHvBzzgVLhs_ABHv9fybDQ2m86QmArR3sejpOoRjBMq4ZNZrhg" alt="Roblox">
+            <p>Drive Mad</p>
+        </div>
+        <div class="menu-item" onclick="launchFullscreen('https://yoho2.pro')">
+            <img src="https://play-lh.googleusercontent.com/4yqjsxq9ntZ2dftqxChXmsm-kZ293L6tBc8bghIFxvMn6T8v8jdGqld1CT_vuocU6g" alt="1v1.lol">
+            <p>Yohoho.io</p>
+        </div>
+        <div class="menu-item" onclick="launchFullscreen('https://run3-911.com/g/run3/')">
+            <img src="https://run3-image-placeholder.com" alt="Run 3">
+            <p>Run 3</p>
+        </div>
+    </div>
+
+    <script>
+    
+     // JavaScript to configure particles
+        particlesJS("particles-js", {
+            particles: {
+                number: {
+                    value: 100,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: "#ffffff"
+                },
+                shape: {
+                    type: "circle",
+                    stroke: {
+                        width: 0,
+                        color: "#000000"
+                    },
+                    polygon: {
+                        nb_sides: 5
+                    },
+                },
+                opacity: {
+                    value: 0.5,
+                    random: false,
+                    anim: {
+                        enable: false,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 5,
+                    random: true,
+                    anim: {
+                        enable: false,
+                        speed: 40,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: false,
+                    distance: 150,
+                    color: "#ffffff",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "top",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false,
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: {
+                        enable: false,
+                        mode: "repulse"
+                    },
+                    onclick: {
+                        enable: false,
+                        mode: "push"
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 400,
+                        line_linked: {
+                            opacity: 1
+                        }
+                    },
+                    bubble: {
+                        distance: 400,
+                        size: 40,
+                        duration: 2,
+                        opacity: 8,
+                        speed: 3
+                    },
+                    repulse: {
+                        distance: 200,
+                        duration: 0.4
+                    },
+                    push: {
+                        particles_nb: 4
+                    },
+                    remove: {
+                        particles_nb: 2
+                    }
+                }
+            },
+            retina_detect: true
+        });
+        // Launches the game in fullscreen
+        function launchFullscreen(url) {
+            var myWindow = window.open('', 'Fullscreen', 'scrollbars=1,height=' + screen.availHeight + ',width=' + screen.availWidth);
+            myWindow.document.write('<!DOCTYPE html>\
+                <html>\
+                <head>\
+                <title>Game</title>\
+                </head>\
+                <body style="margin:0;">\
+                <iframe src="' + url + '" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe>\
+                </body>\
+                </html>');
+        }
+
+        // Search functionality (optional)
+        function filterGames() {
+            const input = document.getElementById('search');
+            const filter = input.value.toLowerCase();
+            const menuItems = document.getElementsByClassName('menu-item');
+            for (let i = 0; i < menuItems.length; i++) {
+                const item = menuItems[i];
+                const text = item.innerText.toLowerCase();
+                if (text.includes(filter)) {
+                    item.style.display = "";
+                } else {
+                    item.style.display = "none";
+                }
+            }
+        }
+
+        // Initialize particles.js background
+        particlesJS.load('particles-js', 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.json', function() {
+            console.log('particles.js loaded');
+        });
+    </script>
+</body>
+</html>
