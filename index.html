@@ -25,20 +25,54 @@
             background: linear-gradient(to bottom, #1c1c1c, #105685);
         }
 
-        /* Sidebar styling */
-        .sidebar {
+        /* Sidebar (Navigation) styling */
+        .nav-bar {
             position: fixed;
             left: 0;
+            top: 0;
+            height: 100%;
+            width: 80px;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+        }
+
+        .nav-bar a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 20px 0;
+            text-align: center;
+            transition: transform 0.3s, color 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .nav-bar a:hover {
+            color: #FFD700;
+            transform: scale(1.2);
+        }
+
+        .nav-bar .icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        /* Social and popular sites section on the right */
+        .socials-section {
+            position: fixed;
+            right: 0;
             top: 0;
             height: 100%;
             width: 250px;
             background-color: rgba(0, 0, 0, 0.6);
             padding: 40px 20px;
-            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.3);
+            box-shadow: -4px 0 15px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
         }
 
-        .sidebar h2 {
+        .socials-section h2 {
             color: #FFD700;
             font-size: 1.5rem;
             margin-bottom: 30px;
@@ -105,7 +139,7 @@
             color: #FFFFFF;
         }
 
-        /* Emerald logo style */
+        /* Main content styling */
         .emerald-logo {
             position: relative;
             z-index: 2;
@@ -139,7 +173,7 @@
             text-shadow: 0 0 10px #FFD700;
         }
 
-        /* Particle styling */
+        /* Floating particle styling */
         .particle {
             position: absolute;
             background-color: rgba(255, 255, 255, 0.6);
@@ -148,7 +182,6 @@
             opacity: 0;
         }
 
-        /* Floating particles animation */
         @keyframes floatUp {
             0% {
                 transform: translateY(0) scale(0.8);
@@ -163,9 +196,6 @@
             }
         }
 
-        /* Font import */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
-        
         /* Footer section */
         .footer {
             position: absolute;
@@ -191,7 +221,7 @@
         .mode-toggle {
             position: absolute;
             top: 20px;
-            right: 20px;
+            right: 300px; /* Adjusted to avoid overlap with social section */
             background-color: #FFD700;
             color: #000;
             padding: 10px;
@@ -206,8 +236,15 @@
 </head>
 <body>
 
-    <!-- Sidebar with popular sites -->
-    <div class="sidebar">
+    <!-- Left-side Navigation Bar -->
+    <div class="nav-bar">
+        <a href="#" class="icon" title="Home">🏠</a>
+        <a href="games.html" class="icon" title="Games">🎮</a>
+        <a href="#" class="icon" title="Proxy">🌐</a>
+    </div>
+
+    <!-- Right-side Social and Popular Sites Section -->
+    <div class="socials-section">
         <h2>Links</h2>
         <div class="popular-site">
             <img src="https://static.vecteezy.com/system/resources/previews/023/986/704/non_2x/youtube-logo-youtube-logo-transparent-youtube-icon-transparent-free-free-png.png" alt="YouTube">
@@ -237,14 +274,13 @@
         <p id="motd">Click me for a new message!</p>
     </div>
 
-
     <!-- Dark Mode Toggle Button -->
     <div class="mode-toggle" onclick="toggleMode()">Dark Mode</div>
 
     <!-- JavaScript for creating particles, random MOTD, and dark mode toggle -->
     <script>
         // Array of possible messages
-        const messages = ["Showed up to a party dressed as a screwdriver. Turned some heads.", "I like helicopters a lot.", "Previously known as The Golden!, "];
+        const messages = ["Showed up to a party dressed as a screwdriver. Turned some heads.", "I like helicopters a lot.", "Previously known as The Golden!"];
 
         // Function to display a random message
         function displayRandomMessage() {
@@ -271,7 +307,7 @@
                 particle.style.height = size;
                 particle.style.left = Math.random() * 100 + 'vw';
                 particle.style.bottom = Math.random() * 100 + 'vh';
-                
+
                 // Random animation duration and delay
                 particle.style.animationDuration = Math.random() * 4 + 3 + 's';
                 particle.style.animationDelay = Math.random() * 5 + 's';
@@ -289,3 +325,4 @@
 
 </body>
 </html>
+
