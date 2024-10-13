@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Search Engine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        #searchBar {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Google Search Engine</h1>
+        <input type="text" id="searchBar" placeholder="Type and press Enter..." onkeydown="searchGoogle(event)">
+    </div>
+
+    <script>
+        function searchGoogle(event) {
+            // Check if the Enter key is pressed (key code 13)
+            if (event.key === "Enter") {
+                const query = document.getElementById('searchBar').value;
+                if (query) {
+                    // Redirect to Google search results page
+                    const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+                    window.location.href = googleSearchUrl;
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
