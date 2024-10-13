@@ -8,15 +8,16 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #2e2e2e;
+            background-color: #0f1827;
             color: #cfcfe6;
             display: flex;
             flex-direction: column;
             height: 100vh;
+            position: relative;
         }
 
         .tab-bar {
-            background-color: #202020;
+            background-color: #0f1827;
             display: flex;
             align-items: center;
             padding: 5px 10px;
@@ -25,7 +26,7 @@
         }
 
         .tab {
-            background-color: #3a3a3a;
+            background-color: #0a121c;
             border-radius: 5px;
             padding: 5px 10px;
             margin-right: 5px;
@@ -36,7 +37,7 @@
         }
 
         .tab.active {
-            background-color: #4a4a4a;
+            background-color: #0c141f;
         }
 
         .tab .close {
@@ -45,19 +46,27 @@
             cursor: pointer;
         }
 
-        .content {
+        .content-wrapper {
             flex: 1;
+            background-color: #0f1827;
+            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #1e1e1e;
+        }
+
+        .logo {
+            max-width: 200px;
+            max-height: 200px;
+            position: absolute;
+            z-index: 1;
         }
 
         .search-bar {
             position: relative;
             width: 100%;
             padding: 10px;
-            background-color: #3e3e3e;
+            background-color: #0f1827;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -70,7 +79,7 @@
             border: none;
             outline: none;
             font-size: 16px;
-            background-color: #5a5a5a;
+            background-color: #0a121c;
             color: #cfcfe6;
         }
 
@@ -82,19 +91,25 @@
             width: 100%;
             height: calc(100vh - 120px); /* Adjust height to fit within header and search bar */
             border: none;
+            position: relative;
+            z-index: 2;
+            background-color: transparent;
         }
     </style>
 </head>
 <body>
     <div class="tab-bar" id="tab-bar">
-        <div class="tab active" onclick="selectTab(this)">
+        <div class="tab active" data-url="about:blank" onclick="selectTab(this)">
             New Tab
             <span class="close" onclick="closeTab(event, this)">×</span>
         </div>
         <div class="tab" onclick="addTab()">+</div>
     </div>
 
-    <iframe id="content" src="about:blank"></iframe>
+    <div class="content-wrapper">
+        <img src="arcane-logo.png" alt="Logo" class="logo">
+        <iframe id="content" src="about:blank"></iframe>
+    </div>
 
     <div class="search-bar">
         <input type="text" id="search-input" placeholder="Search Google or type a URL" onkeydown="searchGoogle(event)">
@@ -105,27 +120,38 @@
             const tabBar = document.getElementById('tab-bar');
             const newTab = document.createElement('div');
             newTab.className = 'tab';
+            newTab.setAttribute('data-url', 'about:blank');
             newTab.innerHTML = 'New Tab <span class="close" onclick="closeTab(event, this)">×</span>';
             newTab.onclick = () => selectTab(newTab);
 
             tabBar.insertBefore(newTab, tabBar.lastElementChild);
+            selectTab(newTab);  // Automatically switch to the new tab
         }
 
         function selectTab(tab) {
             const tabs = document.querySelectorAll('.tab');
             tabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
+
+            const iframe = document.getElementById('content');
+            iframe.src = tab.getAttribute('data-url');
         }
 
         function closeTab(event, closeBtn) {
             event.stopPropagation();
             const tab = closeBtn.parentElement;
+            const wasActive = tab.classList.contains('active');
+
             tab.remove();
 
-            const tabs = document.querySelectorAll('.tab');
-            if (tabs.length > 1 && !document.querySelector('.tab.active')) {
-                tabs[0].classList.add('active');
-                selectTab(tabs[0]);
+            if (wasActive) {
+                const tabs = document.querySelectorAll('.tab');
+                if (tabs.length > 1) {
+                    selectTab(tabs[0]);
+                } else {
+                    const iframe = document.getElementById('content');
+                    iframe.src = 'about:blank';
+                }
             }
         }
 
@@ -133,7 +159,11 @@
             if (event.key === 'Enter') {
                 const query = document.getElementById('search-input').value;
                 const iframe = document.getElementById('content');
-                iframe.src = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+                const url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+                iframe.src = url;
+
+                const activeTab = document.querySelector('.tab.active');
+                activeTab.setAttribute('data-url', url);
             }
         }
     </script>
