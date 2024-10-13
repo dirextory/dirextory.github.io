@@ -3,32 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Search Engine</title>
+    <title>Arcane</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        /* General reset */
+        * {
             margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
+            padding: 0;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0f1827;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
+        }
+
         .container {
             max-width: 600px;
-            margin: 0 auto;
+            width: 100%;
+            padding: 20px;
         }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            color: #ff4d4d; /* Red accent */
+        }
+
+        p {
+            font-size: 16px;
+            margin-bottom: 30px;
+            color: #b0b0b0;
+        }
+
         #searchBar {
             width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            padding: 15px;
+            font-size: 18px;
+            border: 2px solid #ff4d4d; /* Red accent for border */
+            border-radius: 30px;
+            background-color: #1e1e1e;
+            color: #fff;
+            outline: none;
+            text-align: center;
+        }
+
+        #searchBar::placeholder {
+            color: #888;
+        }
+
+        #searchBar:focus {
+            border-color: #ff3333; /* Darker red when focused */
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        footer a {
+            color: #ff4d4d; /* Red accent for links */
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            color: #fff;
+        }
+
+        .logo {
+            margin-bottom: 40px;
+        }
+
+        .logo img {
+            width: 80px;
+            height: auto;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Google Search Engine</h1>
-        <input type="text" id="searchBar" placeholder="Type and press Enter..." onkeydown="searchGoogle(event)">
+        <!-- Logo (replace with actual logo if needed) -->
+        <div class="logo">
+            <img src="arcane-logo.png" alt="Logo">
+        </div>
+
+        <!-- Main Title -->
+        <h1>Arcane</h1>
+        
+        <!-- Subtitle or description -->
+        <p>Arcane is an extension of the "Viridian" unblocked games website.</p>
+
+        <!-- Search Bar -->
+        <input type="text" id="searchBar" placeholder="Search the web freely..." onkeydown="searchGoogle(event)">
+        
+        <!-- Footer with links -->
+        <footer>
+            <a href="#">TitaniumNetwork</a>
+            <a href="#">Discord</a>
+            <a href="#">TompHTTP</a>
+            <a href="#">GitHub</a>
+            <a href="#">Credits</a>
+        </footer>
     </div>
 
     <script>
