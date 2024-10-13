@@ -7,6 +7,8 @@
     <style>
         body {
             margin: 0;
+            body {
+            overflow: hidden;
             font-family: Arial, sans-serif;
             background-color: #0f1827;
             color: #cfcfe6;
@@ -89,7 +91,7 @@
 
         iframe {
             width: 100%;
-            height: calc(100vh - 120px); /* Adjust height to fit within header and search bar */
+            height: calc(100vh - 120px);
             border: none;
             position: relative;
             z-index: 2;
@@ -125,7 +127,7 @@
             newTab.onclick = () => selectTab(newTab);
 
             tabBar.insertBefore(newTab, tabBar.lastElementChild);
-            selectTab(newTab);  // Automatically switch to the new tab
+            selectTab(newTab);
         }
 
         function selectTab(tab) {
