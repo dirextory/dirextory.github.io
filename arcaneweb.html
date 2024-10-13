@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcane Search</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #2e2e2e;
+            color: #cfcfe6;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .tab-bar {
+            background-color: #202020;
+            display: flex;
+            align-items: center;
+            padding: 5px 10px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .tab {
+            background-color: #3a3a3a;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin-right: 5px;
+            color: #cfcfe6;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .tab.active {
+            background-color: #4a4a4a;
+        }
+
+        .tab .close {
+            margin-left: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #1e1e1e;
+        }
+
+        .search-bar {
+            position: relative;
+            width: 100%;
+            padding: 10px;
+            background-color: #3e3e3e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-bar input {
+            width: 50%;
+            padding: 10px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            background-color: #5a5a5a;
+            color: #cfcfe6;
+        }
+
+        .search-bar input::placeholder {
+            color: #cfcfe6;
+        }
+
+        iframe {
+            width: 100%;
+            height: calc(100vh - 120px); /* Adjust height to fit within header and search bar */
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="tab-bar" id="tab-bar">
+        <div class="tab active" onclick="selectTab(this)">
+            New Tab
+            <span class="close" onclick="closeTab(event, this)">×</span>
+        </div>
+        <div class="tab" onclick="addTab()">+</div>
+    </div>
+
+    <iframe id="content" src="about:blank"></iframe>
+
+    <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search Google or type a URL" onkeydown="searchGoogle(event)">
+    </div>
+
+    <script>
+        function addTab() {
+            const tabBar = document.getElementById('tab-bar');
+            const newTab = document.createElement('div');
+            newTab.className = 'tab';
+            newTab.innerHTML = 'New Tab <span class="close" onclick="closeTab(event, this)">×</span>';
+            newTab.onclick = () => selectTab(newTab);
+
+            tabBar.insertBefore(newTab, tabBar.lastElementChild);
+        }
+
+        function selectTab(tab) {
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+        }
+
+        function closeTab(event, closeBtn) {
+            event.stopPropagation();
+            const tab = closeBtn.parentElement;
+            tab.remove();
+
+            const tabs = document.querySelectorAll('.tab');
+            if (tabs.length > 1 && !document.querySelector('.tab.active')) {
+                tabs[0].classList.add('active');
+                selectTab(tabs[0]);
+            }
+        }
+
+        function searchGoogle(event) {
+            if (event.key === 'Enter') {
+                const query = document.getElementById('search-input').value;
+                const iframe = document.getElementById('content');
+                iframe.src = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+            }
+        }
+    </script>
+</body>
+</html>
