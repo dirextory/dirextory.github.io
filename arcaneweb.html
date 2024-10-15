@@ -93,17 +93,11 @@
         max-height: 200px;
         position: absolute;
         z-index: 2;
-        animation: fadeIn 2s ease forwards;
         transition: opacity 0.5s ease;
       }
 
       .logo.hidden {
         opacity: 0;
-      }
-
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
       }
 
       iframe {
@@ -211,6 +205,13 @@
         tabBar.insertBefore(newTab, tabBar.lastElementChild);
         selectTab(newTab);
         adjustTabSizes();
+
+        // Reset the search bar and make it visible again in a new tab
+        document.getElementById("search-bar").classList.remove("hidden");
+        document.getElementById("logo").classList.remove("hidden");
+
+        const iframe = document.getElementById("content");
+        iframe.style.height = 'calc(100vh - 120px)';
       }
 
       function selectTab(tab) {
@@ -273,4 +274,3 @@
     </script>
   </body>
 </html>
-
